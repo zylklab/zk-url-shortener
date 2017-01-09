@@ -1,0 +1,43 @@
+<alfresco-config>
+
+    <config evaluator="string-compare" condition="DocLibCustom">
+        <dependencies>
+            <js src="/custom/shortable-metadata.js" />
+        </dependencies>
+    </config>
+      
+    <config evaluator="aspect" condition="dw:shortable">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="dw:shorturl" for-mode="view"/>
+                </field-visibility>
+            </form>
+        </forms>
+    </config>
+
+    <config evaluator="string-compare" condition="DocumentLibrary">
+        <aspects>
+            <visible>
+                <aspect name="dw:shortable" />
+            </visible>
+        </aspects>
+
+        <indicators>
+            <indicator id="zk-shortable-indicator" index="10" label="shortable.indicator">
+                    <evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
+            </indicator>
+        </indicators>
+         
+        <metadata-templates>
+          <template id="isDWContent">
+            <evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
+            <line index="10" id="date" view="detailed">{date}{size}</line>
+            <line index="20" id="DWContent" evaluator="evaluator.doclib.metadata.isDWContent">{DW}</line>
+            <line index="30" id="tags" view="detailed">{tags}</line>
+            <line index="40" id="social" view="detailed">{social}</line>
+          </template>
+        </metadata-templates>
+    </config>
+
+</alfresco-config>

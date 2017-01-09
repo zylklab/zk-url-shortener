@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+
+    <!-- Dw Model -->   
+    <bean id="dictionaryBootstrap.DW" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+        <property name="models">
+            <list>
+                <value>alfresco/extension/model/dwModel.xml</value>
+            </list>    
+        </property>
+        <property name="labels">
+            <list>
+                <value>alfresco/messages/dwModel</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Registration of JS content behaviour on Add Aspect-->
+    <bean id="OnAddAspectPolicyOnShortable" class="org.alfresco.repo.policy.registration.ClassPolicyRegistration" parent="policyRegistration">
+
+        <property name="policyName">
+            <value>{http://www.alfresco.org}onAddAspect</value>
+        </property>
+
+        <property name="className">
+            <value>{http://drwolf.it/model/1.0}shortable</value>
+        </property>
+
+        <property name="behaviour">
+            <bean class="org.alfresco.repo.jscript.ScriptBehaviour" parent="scriptBehaviour">
+                <property name="location">
+                    <bean class="org.alfresco.repo.jscript.ClasspathScriptLocation">
+                        <constructor-arg>
+                             <value>alfresco/resources/scripts/add-aspect-shortable.js</value>
+                        </constructor-arg>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Registration of JS action for using with content rules-->
+    <bean id="execute-shortable-action" parent="script">
+        <property name="scriptLocation">
+            <bean class="org.alfresco.repo.jscript.ClasspathScriptLocation">
+                <constructor-arg>
+                    <value>alfresco/resources/scripts/createShortUrl.js</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

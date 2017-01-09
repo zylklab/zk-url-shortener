@@ -1,0 +1,26 @@
+<model xmlns="http://www.alfresco.org/model/dictionary/1.0" name="dw:shortable">
+    <description>Shortable Aspect</description>
+    <author>Andrea Agili</author>
+    <version>1.0</version>
+
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+    </imports>
+
+    <namespaces>
+        <namespace uri="http://drwolf.it/model/1.0" prefix="dw"/>
+    </namespaces>
+
+    <aspects>
+        <aspect name="dw:shortable">
+            <title>Short URL Enabled</title>
+            <properties>
+                <property name="dw:shorturl">
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </aspect>
+    </aspects>
+
+</model>
