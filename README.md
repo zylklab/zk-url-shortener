@@ -25,11 +25,13 @@ Once applied aspect in Alfresco Share, for searching, just type @dw:shorturl:"Oa
 
 http://locahost:8080/share/page/search?t=dw:shorturl:OamhPP
 
+![Urlable Screenshot](screenshots/urlable.png)
+
 ## Packaging
 
 You may pack it with jar command. Go into the directory that you unzipped, or cloned via git:
 
-    $ git clone https://github.com/CesarCapillas/zk-url-shortener
+    $ git clone https://github.com/zylklab/zk-url-shortener
     $ cd zk-url-shortener
     $ jar -cf zk-url-shortener.jar *
 
@@ -44,8 +46,8 @@ For installing, just copy the jar file in $TOMCAT/shared/lib and restart Alfresc
 For using really short urls you need Apache in your config (for example, /etc/apache2/sites-enabled/000-default.conf):
 
     # Rewrite config for short urls
-	RewriteEngine On
-	RewriteRule ^/s/(.*)$ /share/page/search?t=dw:shorturl:$1 [R]
+    RewriteEngine On
+    RewriteRule ^/s/(.*)$ /share/page/search?t=dw:shorturl:$1 [R]
 
     # Reverse proxy config 
     RewriteRule ^/$ share [R]
