@@ -1,5 +1,6 @@
 <alfresco-config>
 
+<!--
     <config evaluator="string-compare" condition="DocLibCustom">
         <dependencies>
             <js src="/custom/shortable-metadata.js" />
@@ -39,5 +40,6 @@
           </template>
         </metadata-templates>
     </config>
+-->
 
 </alfresco-config>

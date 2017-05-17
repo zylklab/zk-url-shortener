@@ -51,10 +51,10 @@ For using really short urls you need Apache in your config (for example, /etc/ap
 
     # Reverse proxy config 
     RewriteRule ^/$ share [R]
-    ProxyPass /alfresco 		ajp://localhost:8009/alfresco 
-    ProxyPassReverse /alfresco 	ajp://localhost:8009/alfresco
-    ProxyPass /share 			ajp://localhost:8009/share 
-    ProxyPassReverse /share 	ajp://localhost:8009/share
+    ProxyPass /alfresco         ajp://localhost:8009/alfresco 
+    ProxyPassReverse /alfresco  ajp://localhost:8009/alfresco
+    ProxyPass /share            ajp://localhost:8009/share 
+    ProxyPassReverse /share     ajp://localhost:8009/share
 
 For using urls like http://locahost/s/OamhPP
 
