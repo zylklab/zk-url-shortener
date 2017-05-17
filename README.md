@@ -29,17 +29,20 @@ http://locahost:8080/share/page/search?t=dw:shorturl:OamhPP
 
 ## Packaging
 
-You may pack it with jar command. Go into the directory that you unzipped, or cloned via git:
+Just generate maven packages. Go into the directory that you unzipped, or cloned via git:
 
     $ git clone https://github.com/zylklab/zk-url-shortener
     $ cd zk-url-shortener
-    $ jar -cf zk-url-shortener.jar *
+    $ cd zk-url-shortener-repo
+    $ mvn clean && mvn package -DskipTests=true
+    $ cd ..
+    $ cd zk-url-shortener-share
+    $ mvn clean && mvn package -DskipTests=true
 
-Note: this jar would only work if Alfresco repo and Alfresco Share are deployed in the same Tomcat instance. 
+The generated AMPs are located in corresponding target directories. 
 
-## Installation
-
-For installing, just copy the jar file in $TOMCAT/shared/lib and restart Alfresco
+## Installing
+ - Just copy the corresponding AMP into $ALF_HOME/amps and $ALF_HOME/amps_share, stop Alfresco service, apply AMPs script ($ALF_HOME/bin/apply_amps.sh) and start Alfresco service.
 
 ## Apache reverse proxy config and rewrite urls 
 
@@ -64,11 +67,6 @@ The previous config is enabled with the usual sudoer commands (in Ubuntu or Debi
     sudo a2enmod proxy
     sudo a2enmod proxy_ajp
     sudo service apache2 restart
-
-## More things to do (in the training) :)
- - Ant file for generating jar file and local tasks for a local deployment
- - Use Alfresco Maven SDK 
- - Separate in two AMPs
 
 ## Tested
 
