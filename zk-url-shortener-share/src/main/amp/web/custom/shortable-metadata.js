@@ -15,8 +15,9 @@
                 html = "";
                 var icon_state = "";
                 var dw = properties["dw:shorturl"];
+                var lk = window.location.protocol+"//"+ window.location.host+"/s/"+dw;
                 html = '<span class="item">';
-                html = html + ' <b>URL: </b> '+ window.location.protocol+"//"+ window.location.host+"/s/"+dw;
+                html = html + ' <b>URL: </b><a href="'+lk+'">'+lk+'</a>';
                 html = html + '</span>';
                 return html;
            }
