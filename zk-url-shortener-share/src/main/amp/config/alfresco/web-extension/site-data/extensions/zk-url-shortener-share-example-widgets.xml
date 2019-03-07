@@ -1,52 +1,87 @@
 <extension>
-  <modules>
-    <module>
-      <id>zk-url-shortener-share</id>
-      <version>1.0</version>
-      <auto-deploy>true</auto-deploy>
-         <configurations>
-            <config evaluator="string-compare" condition="DocLibCustom">
-                <dependencies>
-                    <js src="custom/shortable-metadata.js" />
-                </dependencies>
-            </config>
-              
-            <config evaluator="aspect" condition="dw:shortable">
-                <forms>
-                    <form>
-                        <field-visibility>
-                            <show id="dw:shorturl" for-mode="view"/>
-                        </field-visibility>
-                    </form>
-                </forms>
-            </config>
+	<modules>
+		<module>
+			<id>zk-url-shortener-share</id>
+			<version>1.0</version>
+			<auto-deploy>true</auto-deploy>
+			<configurations>
+				<config evaluator="string-compare" condition="DocLibCustom">
+					<dependencies>
+						<js src="custom/shortable-metadata.js" />
+					</dependencies>
+				</config>
 
-            <config evaluator="string-compare" condition="DocumentLibrary">
-                <aspects>
-                    <visible>
-                        <aspect name="dw:shortable" />
-                    </visible>
-                </aspects>
+				<config evaluator="aspect" condition="dw:shortable">
+					<forms>
+						<form>
+							<field-visibility>
+								<show id="dw:shorturl" for-mode="view" />
+							</field-visibility>
+						</form>
+					</forms>
+				</config>
 
-                <indicators>
-                    <indicator id="zk-shortable-indicator" index="10" label="shortable.indicator">
-                            <evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
-                    </indicator>
-                </indicators>
-                 
-                <metadata-templates>
-                  <template id="isDWContent">
-                    <evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
-                    <line index="10" id="date" view="detailed">{date}{size}</line>
-                    <line index="20" id="DWContent" evaluator="evaluator.doclib.metadata.isDWContent">{DW}</line>
-                    <line index="30" id="tags" view="detailed">{tags}</line>
-                    <line index="40" id="social" view="detailed">{social}</line>
-                  </template>
-                </metadata-templates>
-            </config>
-             
-      </configurations>
+				<config evaluator="string-compare"
+					condition="DocumentLibrary">
+					<aspects>
+						<visible>
+							<aspect name="dw:shortable" />
+						</visible>
+					</aspects>
 
-    </module>
-  </modules>
+					<indicators>
+						<indicator id="zk-shortable-indicator" index="10"
+							label="shortable.indicator">
+							<evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
+						</indicator>
+					</indicators>
+
+					<metadata-templates>
+						<template id="isDWContent">
+							<evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
+							<line index="10" id="date" view="detailed">{date}{size}</line>
+							<line index="20" id="DWContent"
+								evaluator="evaluator.doclib.metadata.isDWContent">{DW}</line>
+							<line index="30" id="tags" view="detailed">{tags}</line>
+							<line index="40" id="social" view="detailed">{social}</line>
+						</template>
+					</metadata-templates>
+				</config>
+
+				<config evaluator="string-compare" condition="DocLibActions">
+					<actions>
+						<action id="zk-url-shortener-action" type="javascript">
+							<param name="function">onActionSimpleRepoAction</param>
+							<param name="action">add-features</param>
+							<param name="aspect-name">dw:shortable</param>
+							<param name="successMessage">zk-url-shortener-action.success</param>
+							<param name="failureMessage">zk-url-shortener-action.failure</param>
+							 <evaluator negate="true">evaluator.doclib.metadata.isDWContent</evaluator>
+						</action>
+						<action id="zk-url-shortener-undo-action" type="javascript">
+							<param name="function">onActionSimpleRepoAction</param>
+							<param name="action">remove-features</param>
+							<param name="aspect-name">dw:shortable</param>
+							<param name="successMessage">zk-url-shortener-undo-action.success</param>
+							<param name="failureMessage">zk-url-shortener-undo-action.failure</param>
+							 <evaluator>evaluator.doclib.metadata.isDWContent</evaluator>
+						</action>						
+					</actions>
+					<actionGroups>
+						<actionGroup id="document-browse">
+							<action index="400" id="zk-url-shortener-action" label="Crear URL corta" icon="zk-shortable-action" />
+							<action index="500" id="zk-url-shortener-undo-action" label="Eliminar URL corta" icon="zk-shortable-action" />							
+						</actionGroup>
+						<actionGroup id="document-details">
+							<action index="400" id="zk-url-shortener-action" label="Crear URL corta" icon="zk-shortable-action" />
+							<action index="500" id="zk-url-shortener-undo-action" label="Eliminar URL corta" icon="zk-shortable-action" />	
+						</actionGroup>						
+					</actionGroups>
+				</config>
+				 
+
+			</configurations>
+
+		</module>
+	</modules>
 </extension>
