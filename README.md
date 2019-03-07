@@ -68,6 +68,10 @@ The previous config is enabled with the usual sudoer commands (in Ubuntu or Debi
     sudo a2enmod proxy_ajp
     sudo service apache2 restart
 
+## Contributors
+
+- [Cesar Capillas](http://github.com/CesarCapillas)
+- [Mikel Asla](https://github.com/mikelasla)
 ## Tested
 
 It should work in Alfresco 4.x and 5.x and Apache 2.2
